@@ -1,42 +1,52 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int calculate(int operand[2],char operator);
+// input structure handler
+
+typedef struct {
+    char operator;
+    int operand[2];
+} input;
+
+
+// function decleration
+
+int calculate(input * p);
 int add(int a,int b);
 int substract(int a,int b);
 int multiply(int a,int b);
 int dvision(int a,int b);
 
 int main(){
-    int operand[2],result;
-    char operator; 
+    int result;
+    input calculator;
     printf("\nEnter numbers: ");
-    scanf("%d",&operand[0]);
-    scanf("%d",&operand[1]);
+    scanf("%d",&calculator.operand[0]);
+    scanf("%d",&calculator.operand[1]);
 
     printf("\nEnter the operand: ");
-    scanf(" %c",&operator);
+    scanf(" %c",&calculator.operator);
 
     printf("\n");
 
-    result=calculate(operand,operator);
+    result=calculate(&calculator);
 
     printf("Calcualtion Result is:%d \n", result);
     return 0;
 }
 
-int calculate(int opreand[2],char operator){
-    switch(operator){
+int calculate(input *calculate){
+    switch(calculate->operator){
         case '+':
-            return add(opreand[0],opreand[1]);
+            return add(calculate->operand[0], calculate->operand[1]);
         case '-':
-            return substract(opreand[0],opreand[1]);
+            return substract(calculate->operand[0], calculate->operand[1]);
         case '*':
-            return multiply(opreand[0],opreand[1]);
+            return multiply(calculate->operand[0], calculate->operand[1]);
         case 'x':
-            return multiply(opreand[0],opreand[1]);
+            return multiply(calculate->operand[0], calculate->operand[1]);
         case '/':
-            return dvision(opreand[0],opreand[1]);
+            return dvision(calculate->operand[0], calculate->operand[1]);
         default:  
             printf("Operation not found!!!!\n");
             exit(1);
